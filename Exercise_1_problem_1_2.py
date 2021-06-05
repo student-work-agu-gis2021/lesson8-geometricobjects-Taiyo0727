@@ -236,11 +236,11 @@ def get_length(geom):
   ・Returns
         geom
   """
+  assert type(geom) == Polygon or type(geom) == LineString, "'geom' should be either LineString or Polygon!"
   if geom.geom_type == 'LineString':
         return geom.length
   elif geom.geom_type == 'Polygon':
         return geom.exterior.length
-#####Error wakaranai
     # Test and demonstrate the usage of the function:
 
 get_length(poly1)
