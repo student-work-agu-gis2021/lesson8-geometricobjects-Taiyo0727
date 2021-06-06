@@ -13,10 +13,11 @@
 import pandas as pd 
 
 #Check how many rows and columns there are:
-data
+fp = 'data/travelTimes_2015_Helsinki.txt'
+data = pd.read_csv(fp, sep=';')
 
 # CODE FOR TESTING YOUR SOLUTION
-
+data
 # This test print should print first five rows in the data (if not, something is incorrect):
 print(data.head())
 
@@ -25,7 +26,7 @@ print(data.head())
 # 
 
 # YOUR CODE HERE 2 to set `data`
-
+data = data.filter(['from_x','from_y','to_x','to_y'])
 # CODE FOR TESTING YOUR SOLUTION
 print(list(data.columns))
 
@@ -34,7 +35,8 @@ print(list(data.columns))
 # 
 
 # YOUR CODE HERE 3 to define empty lists orig_points and dest_points
-
+orig_points = []
+dest_points = []
 # CODE FOR TESTING YOUR SOLUTION
 
 # List length should be zero at this point:
@@ -70,6 +72,10 @@ print('dest_points length:', len(dest_points))
 from shapely.geometry import Point
 
 # CODE FOR TESTING YOUR SOLUTION
+for i in range(len(data)):
+  orig_points.append(Point(data.at[i, "from_x"],data.at[i,"from_y"]))
+  dest_points.append(Point(data.at[i, "to_x"],data.at[i,"to_y"]))
+
 
 # This test print should print out the first origin and destination coordinates in the two lists:
 print("ORIGIN X Y:", orig_points[0].x, orig_points[0].y)
