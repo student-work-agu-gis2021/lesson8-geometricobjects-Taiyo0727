@@ -100,7 +100,7 @@ assert len(dest_points) == len(data), "Number of destination points must be the 
 # 
 
 # YOUR CODE HERE 5
-
+lines = []
 
 # CODE FOR TESTING YOUR SOLUTION
 
@@ -120,7 +120,9 @@ print('lines length:', len(lines))
 # YOUR CODE HERE 6 to append LineString to lines
 #raise NotImplementedError()
 from shapely.geometry import LineString
-
+for orig, dest in zip(orig_points, dest_points):
+  line = LineString([orig, dest])
+  lines.append(line)
 # CODE FOR TESTING YOUR SOLUTION
 
 #Test that the list has correct number of LineStrings
@@ -133,7 +135,9 @@ assert len(lines) == len(data), "There should be as many lines as there are rows
 # 
 
 # YOUR CODE HERE 7 to find total length
-
+total_length = 0
+for line in lines:
+  total_length += line.length
 # CODE FOR TESTING YOUR SOLUTION
 
 # This test print should print the total length of all lines
@@ -150,6 +154,39 @@ print("Total length of all lines is", round(total_length, 2))
 # **Note: avoid using the same variable names as earlier inside your functions!** Functions are often defined at the top of the script file (or jupyter notebook), and now that we have them here at the very end you might accidentally alter an existing variable inside your functions. To avoid this, alter the variable names inside your own functions if you re-use code from this notebook. 
 
 # YOUR CODE HERE 8 to define create_od_lines() and calculate_total_distance()
+def create_od_lines(point1, point2):
+  """
+  ・Purpose
+  to create odd lines
+  -----------
+  ・Parameters
+  point1, point2 : float 
+  -----------
+  ・Returns
+  od_lines
+  """
+  od_lines =[]
+  for orig,dest in zip(point1, point2):
+    line = LineString([orig, dest])
+    od_lines.append(line)
+  return od_lines
+
+
+def calculate_total_distance(line_string):
+  """
+  ・Purpose
+  to caculate the total distance
+  -----------
+  ・Parameters
+ line_string
+  -----------
+  ・Returns
+        total_length
+  """
+  total_length = 0
+  for line in line_string:
+    total_length += line.length
+  return total_length
 
 
 # CODE FOR TESTING YOUR SOLUTION
